@@ -47,13 +47,13 @@ void main(){
 			}
 
 	for(i=0;i<s;i++){
-	fprintf(fp2,"\n q%d = {%d",i,i);
+	fprintf(fp2,"%d",i);
 	for(j=0;j<s;j++){
 		visited[j]=0;
 		}
 		visited[i]=1;
 		closure(i);
-		fprintf(fp2,"}");
+		//fprintf(fp2,"}");
 
 			}
 
@@ -63,43 +63,52 @@ printf("\n");
 */
 int i,t;
 f3=fopen("text1.txt","r");
-fp4=fopen("text2.txt","r");
-fp1=fopen("a.txt","w");
+fp4=fopen("text2.txt","r+");
+fp1=fopen("a.txt","a+");
 fp2=fopen("b.txt","w");
-char a[100],b[10],y[20],d[2];;
+char a[100],b[10],y[20],d[2],w[20]="",r[20]="";
 
 
-
-while(fscanf(fp4,"%s",a)!=EOF){
+//while(fscanf(fp4,"%s",a)!=EOF){
+fscanf(fp4,"%s",a);
 	printf("\n%s\n",a );
 
 	int x=strlen(a);
 	t=0;
 while(t<x)
 {
-	printf("%c\t",a[t] );
 while(fscanf(f3,"%s",b)!=EOF)
 {
-	printf("%s\t",b );
 if(b[0]==a[t])
 {
 if(b[1]=='1'){
-//fprintf("\n\na%c\n\n",d[2]);
-fprintf(fp1,"a%c\t",b[2]);
+  w[strlen(w)]=b[2];
+printf("\n\na%c\n\n",b[2]);
+fprintf(fp1,"%c",b[2]);
 }
 if(b[1]=='2')
-//printf("\n\nb%c\n\n",b[2]);
-fprintf(fp2,"b%c\t",b[2]);
+{
+    r[strlen(r)]=b[2];
+printf("\n\nb%c\n\n",b[2]);
+fprintf(fp2,"%c",b[2]);
 
 }
-}
+}}
 fprintf(fp1,"\n");
 fprintf(fp2,"\n");
 rewind(f3);
 printf("\n" );
 t++;
+//}
+rewind(fp4);
+fprintf(fp4,"%s\n",w );
+fprintf(fp4,"%s\n",r );
+
+//fflush(fp4);
 }
-}
+//printf("{%s}-> {%s},{%s}",a,w,r);
+fprintf(fp1,"{%s}-> {%s},{%s}\n",a,w,r);
+
 
 
 
