@@ -6,7 +6,7 @@
 char tr[20][3];
 int s,t;
 int visited[20];
-FILE *fp1,*fp2,*fp3,*fp4,*f3,*fp5,*fp6;
+FILE *fp1,*fp2,*fp3,*fp4,*f3,*fp5,*fp6,*f7;
 
 void closure(int i)
 {
@@ -63,10 +63,11 @@ printf("\n");
 */
 int i,t;
 f3=fopen("text1.txt","r");
+f7=fopen("text3.txt","r");
 fp4=fopen("text2.txt","r+");
 fp1=fopen("a.txt","a+");
 fp2=fopen("b.txt","w");
-char a[100],b[10],y[20],d[2],w[20]="",r[20]="";
+char a[100],b[10],y[20],d[2],w[20]="",r[20]="",ex[40],yx[40];
 
 
 //while(fscanf(fp4,"%s",a)!=EOF){
@@ -82,15 +83,33 @@ while(fscanf(f3,"%s",b)!=EOF)
 if(b[0]==a[t])
 {
 if(b[1]=='1'){
-  w[strlen(w)]=b[2];
-printf("\n\na%c\n\n",b[2]);
-fprintf(fp1,"%c",b[2]);
+  
+while(fscanf(f7,"%s",ex)!=EOF)
+{
+if((ex[0]==w[0])&&(strcmp(ex,w)!=-1))
+{
+strcpy(w,ex);
 }
+printf("%s \t %s\n",w,ex);
+}
+w[strlen(w)]=b[2];
+printf("\n\na%c\n\n",b[2]);
+//fprintf(fp1,"%c",b[2]);
+}
+rewind(f7);
 if(b[1]=='2')
 {
     r[strlen(r)]=b[2];
+while(fscanf(f7,"%s",yx)!=EOF)
+{
+if((yx[0]==r[0])&&(strcmp(ex,r)!=-1))
+strcpy(r,yx);
+printf("%s \t %s\n",w,yx);
+}
+rewind(f7);
+ r[strlen(r)]=b[2];
 printf("\n\nb%c\n\n",b[2]);
-fprintf(fp2,"%c",b[2]);
+//fprintf(fp2,"%c",b[2]);
 
 }
 }}
@@ -106,7 +125,7 @@ fprintf(fp4,"%s\n",r );
 
 //fflush(fp4);
 }
-//printf("{%s}-> {%s},{%s}",a,w,r);
+printf("{%s}-> {%s},{%s}",a,w,r);
 fprintf(fp1,"{%s}-> {%s},{%s}\n",a,w,r);
 
 
@@ -119,6 +138,7 @@ fclose(fp1);
 fclose(fp2);
 fclose(f3);
 fclose(fp4);
+fclose(f7);
 printf("\n\n" );
 
 
